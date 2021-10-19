@@ -1,18 +1,89 @@
+
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app" class="app">
+    <h1>{{ restaurantName }}</h1>
+    <p class="description">
+      Bienvenue dans notre café {{ restaurantName }}! Nous sommes réputés pour
+      notre pain et nos merveilleuses pâtisseries. Faites vous plaisir dès le
+      matin ou avec un goûter réconfortant. Mais attention, vous verrez qu'il
+      est difficile de s'arrêter.
+    </p>
+
+    <section class="menu">
+      <h2>Menu</h2>
+      <MenuItem
+          v-for="item in simpleMenu"
+          :key = "item.name"
+          :add-to-shopping-cart = "addToShoppingCart"
+          :image = "item.image"
+          :in-stock = "item.inStock"
+          :name = "item.name"
+          :quantity = "item.quantity"
+      />
+    </section>
+
+    <aside class="shopping-cart">
+      <h2>Panier d'achat : {{ shoppingCart }} articles</h2>
+    </aside>
+
+    <footer class="footer">
+      <p>{{ copyright }}</p>
+    </footer>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import MenuItem from "../components/MenuItem";
 
 export default {
   name: 'Home',
   components: {
-    HelloWorld
+    MenuItem
+  },
+  data() {
+    return{
+      restaurantName: "La belle vue",
+      shoppingCart: 0,
+      simpleMenu: [
+        {
+          name: "Croissant",
+          image: {
+            source: "/images/croissant.jpg",
+            alt: "Un croissant"
+          },
+          inStock: true,
+          quantity: 1
+        },
+        {
+          name: "Baguette de pain",
+          image: {
+            source: "/images/french-baguette.jpeg",
+            alt: "Quatre baguettes de pain"
+          },
+          inStock: true,
+          quantity: 1
+        },
+        {
+          name: "Éclair",
+          image: {
+            source: "/images/eclair.jpg",
+            alt: "Éclair au chocolat"
+          },
+          inStock: false,
+          quantity: 1
+        }
+      ]
+    }},
+  computed: {
+    copyright() {
+      const currentYear = new Date().getFullYear()
+      return `Copyright ${this.restaurantName} ${currentYear}`
+    }
+  },
+  methods: {
+    addToShoppingCart(amount) {
+      this.shoppingCart += amount
+    }
   }
 }
 </script>
