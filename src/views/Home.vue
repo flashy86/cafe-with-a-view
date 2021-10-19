@@ -19,6 +19,7 @@
           :in-stock = "item.inStock"
           :name = "item.name"
           :quantity = "item.quantity"
+          :price = "item.price"
       />
     </section>
 
@@ -40,7 +41,7 @@ export default {
   components: {
     MenuItem
   },
-  data() {
+   data() {
     return{
       restaurantName: "La belle vue",
       shoppingCart: 0,
@@ -52,7 +53,8 @@ export default {
             alt: "Un croissant"
           },
           inStock: true,
-          quantity: 1
+          quantity: 1,
+          price: 2.99
         },
         {
           name: "Baguette de pain",
@@ -61,7 +63,8 @@ export default {
             alt: "Quatre baguettes de pain"
           },
           inStock: true,
-          quantity: 1
+          quantity: 1,
+          price: 3.99
         },
         {
           name: "Éclair",
@@ -70,7 +73,8 @@ export default {
             alt: "Éclair au chocolat"
           },
           inStock: false,
-          quantity: 1
+          quantity: 1,
+          price: 4.99
         }
       ]
     }},
