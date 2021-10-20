@@ -1,7 +1,7 @@
 
 <template>
   <div id="app" class="app">
-    <h1>{{ restaurantName }}</h1>
+    <h1 class="titre">{{ restaurantName }}</h1>
     <p class="description">
       Bienvenue dans notre café {{ restaurantName }}! Nous sommes réputés pour
       notre pain et nos merveilleuses pâtisseries. Faites vous plaisir dès le
@@ -10,11 +10,11 @@
     </p>
 
     <section class="menu">
-      <h2>Menu</h2>
+      <h2 class="titre_menu">Menu</h2>
       <MenuItem
           v-for="item in simpleMenu"
           :key = "item.name"
-          :add-to-shopping-cart = "addToShoppingCart"
+          @add-items-to-cart= "addToShoppingCart"
           :image = "item.image"
           :in-stock = "item.inStock"
           :name = "item.name"
@@ -91,3 +91,45 @@ export default {
   }
 }
 </script>
+<style scoped>
+.app{
+  text-align: center;
+  font-family:Avenir, Helvetica, Arial, sans-serif ;
+}
+.titre{
+  font-family:"Lucida Calligraphy",cursive;
+  font-size: xxx-large;
+  text-decoration:lightgray;
+  text-shadow:1px 1px 2px aliceblue, 0 0 1em #2c3e50, 0 0 0.2em blue;;
+  color: #2c3e50;
+}
+.shopping-cart {
+  position: absolute;
+  right: 30px;
+  top: 0;
+}
+.description {
+  max-width: 960px;
+  font-size: 1.2rem;
+  margin: 0 auto;
+}
+.titre_menu{
+  font-family:"Lucida Calligraphy",cursive;
+  font-size: x-large;
+  text-decoration: underline;
+}
+.menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.footer{
+  font-style: italic;
+  font-size: large;
+  color: slategray;
+  border-radius: 10px;
+  border-style: groove;
+}
+
+</style>

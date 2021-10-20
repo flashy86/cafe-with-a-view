@@ -9,18 +9,44 @@
       <div>
         <label for="add-item-quantity">Quantité : {{ quantity }}</label>
         <input v-model.number="quantity" id="add-item-quantity" type="number" />
-        <button @click="addToShoppingCart(quantity)">
-          Ajouter au panier
-        </button>
+        <BaseButton @click = "updateShoppiingCart(quantity)">
+        Ajouter au panier
+        </BaseButton>
+
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import BaseButton from "./BaseButton.vue";
+
 export default {
   name: "MenuItem",
-  props: ["addToShoppingCart", "image", "inStock", "name","price", "quantity"],
+  components:{
+    BaseButton
+  },
+  props: {
+    name:{
+      type: String
+    },
+    price:{
+      type: Number,
+      required: true
+  },
+    quantity:{
+      type: Number,
+      default:1
+    },
+    inStock:{
+      type: Boolean,
+      required: true
+    },
+    image:{
+      type:Object,
+      required: true
+    }
+  },
   computed: {
     generatedPrice(){
       if (this.onSale) {
@@ -38,8 +64,31 @@ export default {
   },
   data(){
     return{onSale:false}
+  },
+  methods: {
+    updateShoppiingCart(quantity){
+      this.$emit("add-items-to-cart", quantity)
+    }
   }
 }
 </script>
 
-<style></style>
+<style>
+
+
+
+.menu-item {
+  display: flex;
+  width: 500px;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+.menu-item__image {
+  max-width: 300px;
+}
+
+
+
+
+
+</style>
